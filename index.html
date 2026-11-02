@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Larp Spy LLC - Ultimate Human Control</title>
+    <style>
+        :root {
+            --bg-color: #0d0d11;
+            --panel-bg: #16161f;
+            --accent-color: #ff5e00;
+            --accent-glow: rgba(255, 94, 0, 0.4);
+            --text-color: #e2e2e9;
+            --text-muted: #8a8a9e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(22,22,31,0) 100%);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .promo-banner {
+            background: var(--accent-color);
+            color: #000;
+            text-align: center;
+            font-weight: bold;
+            padding: 8px 0;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 50px 20px;
+            background: radial-gradient(circle at center, rgba(255, 94, 0, 0.15) 0%, rgba(13,13,17,1) 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .hero-btn {
+            background: var(--accent-color);
+            color: #000;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--accent-color);
+        }
+
+        .as-seen-on {
+            text-align: center;
+            padding: 30px 20px;
+            background: #111118;
+            border-top: 1px solid #222230;
+            border-bottom: 1px solid #222230;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .pricing-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .pricing-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid #222230;
+            border-radius: 8px;
+            width: 320px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .card.featured {
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--accent-color);
+            color: #000;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 20px;
+        }
+
+        .plan-name {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .price-box {
+            margin-bottom: 25px;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .current-price {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .current-price span {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 35px;
+            flex-grow: 1;
+        }
+
+        .features-list li {
+            margin-bottom: 12px;
+            color: var(--text-color);
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: var(--accent-color);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .features-list li.disabled {
+            color: var(--text-muted);
+        }
+
+        .features-list li.disabled::before {
+            content: "✕";
+            color: #cc3333;
+        }
+
+        .buy-btn {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #333344;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .card.featured .buy-btn {
+            background: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+        }
+
+        .buy-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .card.featured .buy-btn:hover {
+            background: #ff7d33;
+            border-color: #ff7d33;
+            color: #000;
+        }
+
+        footer {
+            background: #08080c;
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid #16161f;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="promo-banner">
+        🎃 HALLOWEEN SPECIAL: 50% OFF ALL TIERS FOR A LIMITED TIME ONLY! 🎃
+    </div>
+
+    <header>
+        <div class="logo">Larp Spy <span>LLC</span></div>
+    </header>
+
+    <section class="hero">
+        <h1>Forget Looksmaxxing</h1>
+        <p>Why worry about the "True Adam Converter" or matching social media trends? Take complete control. Designed by prominent inventor and CEO Gabriel Lee, our breakthrough tech allows absolute sovereignty over mind and movement.</p>
+        <a href="#pricing" class="hero-btn">Explore Tiers</a>
+    </section>
+
+    <div class="as-seen-on">
+        As demonstrated live on the Marvelous LHA Radio Show with Cyril! "Worked way better than I thought it would!"
+    </div>
+
+    <section class="pricing-section" id="pricing">
+        <h2>Choose Your Tier</h2>
+        <p class="pricing-subtitle">Buy now or it'll all be gone.</p>
+
+        <div class="cards-container">
+            <!-- Newbie Plan -->
+            <div class="card">
+                <div class="plan-name">Newbie Plan</div>
+                <div class="price-box">
+                    <div class="original-price">$200.00</div>
+                    <div class="current-price">$100<span>/mo</span></div>
+                </div>
+                <ul class="features-list">
+                    <li>Purely cosmetic design</li>
+                    <li>Premium look & feel</li>
+                    <li class="disabled">No functional control capabilities</li>
+                    <li class="disabled">No movement override</li>
+                    <li class="disabled">No neural sync</li>
+                </ul>
+                <a href="#" class="buy-btn">Acquire Look</a>
+            </div>
+
+            <!-- Go Plan -->
+            <div class="card">
+                <div class="plan-name">Go Plan</div>
+                <div class="price-box">
+                    <div class="original-price">$800.00</div>
+                    <div class="current-price">$400<span>/mo</span></div>
+                </div>
+                <ul class="features-list">
+                    <li>Premium look & feel</li>
+                    <li>Full physical movement control</li>
+                    <li>Kinematic motor override</li>
+                    <li class="disabled">No mind/cognitive control</li>
+                </ul>
+                <a href="#" class="buy-btn">Deploy Control</a>
+            </div>
+
+            <!-- Maxlarp Plan -->
+            <div class="card featured">
+                <div class="badge">Most Powerful</div>
+                <div class="plan-name">Maxlarp Plan</div>
+                <div class="price-box">
+                    <div class="original-price">$1,000.00</div>
+                    <div class="current-price">$500<span>/mo</span></div>
+                </div>
+                <ul class="features-list">
+                    <li>Premium look & feel</li>
+                    <li>Full physical movement control</li>
+                    <li>Total cognitive & mind override</li>
+                    <li>Complete immersive sovereignty</li>
+                    <li>Gabriel Lee's Signature Spec</li>
+                </ul>
+                <a href="#" class="buy-btn">Command Reality</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Larp Spy LLC. All Rights Reserved. School Project Presentation Content.</p>
+    </footer>
+
+</body>
+</html>
